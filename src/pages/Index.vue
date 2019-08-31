@@ -1,6 +1,9 @@
 <template>
   <q-page class="flex flex-center">
-    <img alt="Quasar logo" src="~assets/quasar-logo-full.svg">
+      <div class="q-p-md">
+          <div class="col-auto">heyyy</div>
+          <div class="col-grow">heyyy</div>
+      </div>
   </q-page>
 </template>
 

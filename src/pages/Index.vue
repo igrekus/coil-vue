@@ -33,17 +33,9 @@
                     dense
                     :decimals="0"
                     :step="1"
-                    :rules="[ isValidLoopCount || 'lalka azazaz' ]"
+                    :rules="[ isValidLoopCount ]"
                 />
-                <div class="q-gutter-sm row items-start">
-                    <q-uploader
-                            label="Открыть файл"
-                            auto-upload
-                            url="http://localhost:4444/upload"
-                            @failed="onUploadFailed"
-                            @uploaded="onUploadFinished"
-                    />
-                </div>
+                <q-input type="file" @change="onFileUpload"/>
                 <br/>
                 <div class="row rox-xl">
                     <q-btn class="col-auto" color="primary" @click="onCalcClick" :disable="isReadyToCalc">Рассчитать</q-btn>
@@ -82,16 +74,15 @@ export default {
       console.log('click')
       this.wireGap = 5
     },
-    onUploadFailed (info) {
-      if (info.files.length) {
-        this.isFileReady = false
-      }
+    onFileUpload (e) {
+      const file = e.target.files[0]
+      const reader = new FileReader()
+
+      reader.onload = e => this.onFileLoaded(e.target.result)
+      reader.readAsText(file)
     },
-    onUploadFinished (info) {
-      if (info.files.length) {
-        console.log('uplaod success')
-        this.isFileReady = true
-      }
+    onFileLoaded (contents) {
+      console.log(contents)
     }
   },
   computed: {

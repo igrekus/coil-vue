@@ -49,6 +49,7 @@
                     <q-btn class="col-auto" color="primary" @click="onCalcClick" :disable="isReadyToCalc">Рассчитать</q-btn>
                 </div>
             </div>
+            <div class="col-auto">&nbsp;&nbsp;&nbsp;</div>
             <div class="col-6" style="border: 1px solid green">
                 .col-12 .col-md-auto (Variable width content)
             </div>

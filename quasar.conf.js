@@ -6,7 +6,9 @@ module.exports = function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     boot: [
-      'axios'
+      'axios',
+      'snapsvg',
+      'jquery'
     ],
 
     css: [
@@ -78,6 +80,18 @@ module.exports = function (ctx) {
             formatter: require('eslint').CLIEngine.getFormatter('stylish')
           }
         })
+        cfg.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /node_modules/
+        })
+        cfg.module.rules.push({
+          test: require.resolve('snapsvg/dist/snap.svg.js'),
+          use: 'imports-loader?this=>window,fix=>module.exports=0'
+        })
+        cfg.resolve.alias['snapsvg'] = 'snapsvg/dist/snap.svg.js'
+        // Now you can "const Snap = require('snapsvg')" on a page or component when you need to use Snap svg
       }
     },
 

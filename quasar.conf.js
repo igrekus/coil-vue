@@ -8,7 +8,8 @@ module.exports = function (ctx) {
     boot: [
       'axios',
       'snapsvg',
-      'jquery'
+      'jquery',
+      'clipper'
     ],
 
     css: [
@@ -90,8 +91,12 @@ module.exports = function (ctx) {
           test: require.resolve('snapsvg/dist/snap.svg.js'),
           use: 'imports-loader?this=>window,fix=>module.exports=0'
         })
+        cfg.module.rules.push({
+          test: require.resolve('js-clipper/dist/clipper_unmin.js'),
+          use: 'imports-loader?this=>window,fix=>module.exports=0'
+        })
         cfg.resolve.alias['snapsvg'] = 'snapsvg/dist/snap.svg.js'
-        // Now you can "const Snap = require('snapsvg')" on a page or component when you need to use Snap svg
+        cfg.resolve.alias['clipper'] = 'js-clipper/dist/clipper_unmin.js'
       }
     },
 
